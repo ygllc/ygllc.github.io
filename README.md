@@ -11,7 +11,6 @@ This is a Kotlin Multiplatform project targeting Web.
 
 ### Build and Run Web
 
-
 To build and run the development version of the web app, use the run configuration from the run widget
 in your IDE's toolbar or run it directly from the terminal:
 - for the Wasm target (faster, modern browsers):
