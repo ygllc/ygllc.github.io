@@ -27,6 +27,9 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
       - name: Build Wasm Artifacts
         # This task generates the production ready static files
         run: ./gradlew :composeApp:wasmJsBrowserDistribution
