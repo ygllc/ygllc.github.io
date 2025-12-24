@@ -25,7 +25,7 @@ data class HeroItem(
     val color: Color
 )
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun App() {
     // Custom Theme Colors based on the YG LLC screenshot
@@ -41,7 +41,7 @@ fun App() {
         onSurface = onSurfaceColor
     )
 
-    MaterialTheme(colorScheme = material3Colors) {
+    MaterialExpressiveTheme(colorScheme = material3Colors) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
