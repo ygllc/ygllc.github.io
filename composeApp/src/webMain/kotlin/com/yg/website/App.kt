@@ -25,7 +25,7 @@ data class HeroItem(
     val color: Color
 )
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun App() {
     // Custom Theme Colors based on the YG LLC screenshot
