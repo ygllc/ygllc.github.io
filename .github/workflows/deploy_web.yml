@@ -3,7 +3,8 @@ name: Deploy Web App
 on:
   push:
     branches:
-      - main
+      - master  # Change to 'master' if needed
+  workflow_dispatch:
 
 permissions:
   contents: read
