@@ -17,9 +17,11 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.yg.website.ui.theme.AppTypography
 
 // Define the data model for the Hero Carousel items
 data class HeroItem(
+    val id: Int,
     val title: String,
     val description: String,
     val color: Color
@@ -29,9 +31,9 @@ data class HeroItem(
 @Composable
 fun App() {
     // Custom Theme Colors based on the YG LLC screenshot
-    val brandPurple = Color(0xFF5B4D7E)  // Main card color
-    val backgroundDark = Color(0xFF1C1B1F) // App background
-    val titleColor = Color(0xFFD0BCFF)     // Header text color (lighter purple)
+    val brandPurple = MaterialTheme.colorScheme.onPrimaryFixedVariant  // Main card color
+    val backgroundDark = MaterialTheme.colorScheme.primaryFixed // App background
+    val titleColor = MaterialTheme.colorScheme.primary     // Header text color (lighter purple)
     val onSurfaceColor = Color.White
 
     val material3Colors = darkColorScheme(
@@ -41,7 +43,7 @@ fun App() {
         onSurface = onSurfaceColor
     )
 
-    MaterialExpressiveTheme(colorScheme = material3Colors) {
+    MaterialExpressiveTheme(colorScheme = material3Colors, typography = AppTypography) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -72,19 +74,28 @@ fun HeroCarouselSection() {
     val items = remember {
         listOf(
             HeroItem(
+                id = 0,
                 title = "MyMileage",
                 description = "MyMileage is a modern Android app\nthat makes tracking your vehicle’s\nmileage, fuel efficiency, and trip history\nboth simple and accurate.",
                 color = Color(0xFF5B4D7E) // The main purple color
             ),
             HeroItem(
+                id = 1,
                 title = "Project Beta",
                 description = "The next generation of tools.\nComing soon to the portfolio.",
                 color = Color(0xFF4A3B69)
             ),
             HeroItem(
+                id = 2,
                 title = "Analytics",
                 description = "Deep dive into your data\nwith our new analytics platform.",
                 color = Color(0xFF3E3258)
+            ),
+            HeroItem(
+                id = 3,
+                title = "Future App",
+                description = "Expanding the ecosystem with\nconnected services.",
+                color = Color(0xFF5B4D7E)
             )
         )
     }
@@ -97,22 +108,21 @@ fun HeroCarouselSection() {
     // while the component handles the "masking" and "peeking" of the next item automatically.
     HorizontalMultiBrowseCarousel(
         state = state,
-        preferredItemWidth = 320.dp, // Large width to create the Hero effect
+        preferredItemWidth = 350.dp, // Large width to create the Hero effect
         itemSpacing = 16.dp,
         contentPadding = PaddingValues(horizontal = 32.dp),
         modifier = Modifier
             .fillMaxWidth()
             .height(450.dp) // Fixed height for the hero section
     ) { i ->
+
         val item = items[i]
 
-        // The carousel item content
-        Card(
-            colors = CardDefaults.cardColors(containerColor = item.color),
-            shape = RoundedCornerShape(28.dp), // M3-style rounded corners
+        Box(
             modifier = Modifier
+                .maskClip(MaterialTheme.shapes.extraLarge)
                 .fillMaxSize()
-                .maskClip(MaterialTheme.shapes.extraLarge) // Ensures clean clipping during scroll
+                .background(item.color)
         ) {
             Column(
                 modifier = Modifier
