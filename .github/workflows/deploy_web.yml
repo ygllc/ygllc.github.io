@@ -40,7 +40,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # The path depends on your gradle setup, but this is the standard default:
+          # The path depends on your Gradle setup, but this is the standard default:
           path: composeApp/build/dist/wasmJs/productionExecutable
 
       - name: Deploy to GitHub Pages

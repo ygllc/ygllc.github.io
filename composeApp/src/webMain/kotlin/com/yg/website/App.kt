@@ -36,6 +36,7 @@ fun App() {
             // Header: YG LLC
             Text(
                 text = "YG LLC",
+                fontFamily = robotoFlexTopAppBar,
                 fontSize = 48.sp,
                 fontWeight = FontWeight.Black,
                 fontStyle = FontStyle.Italic,
