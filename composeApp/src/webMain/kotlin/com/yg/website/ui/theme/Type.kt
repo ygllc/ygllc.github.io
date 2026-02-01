@@ -18,8 +18,25 @@ val baseline = Typography()
 val AppTypography
     @Composable get() = Typography().run {
         val bodyFontFamily = FontFamily(Font(Res.font.google_sans_flex_400))
-
         val displayFontFamily = FontFamily(Font(Res.font.google_sans_flex_600))
+        val robotoFlexTopAppBar = FontFamily(
+            androidx.compose.ui.text.font.Font(
+                R.font.roboto_flex_variable,
+                variationSettings = FontVariation.Settings(
+                    FontVariation.width(125f),
+                    FontVariation.weight(1000),
+                    FontVariation.grade(0), // <-- Int, not Float
+                    FontVariation.Setting("XOPQ", 96F),
+                    FontVariation.Setting("XTRA", 500f),
+                    FontVariation.Setting("YOPQ", 79f),
+                    FontVariation.Setting("YTAS", 750f),
+                    FontVariation.Setting("YTDE", 203f),
+                    FontVariation.Setting("YTFI", 738f),
+                    FontVariation.Setting("YTLC", 514f),
+                    FontVariation.Setting("YTUC", 712f)
+                )
+            )
+        )
 
         copy(
             displayLarge = baseline.displayLarge.copy(

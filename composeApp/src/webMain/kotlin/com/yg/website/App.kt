@@ -1,46 +1,29 @@
 package com.yg.website
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.material3.carousel.CarouselDefaults
 import androidx.compose.material3.carousel.HorizontalMultiBrowseCarousel
 import androidx.compose.material3.carousel.rememberCarouselState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.yg.website.ui.theme.AppTypography
 
-// Define the data model for the Hero Carousel items
-data class HeroItem(
-    val id: Int,
-    val title: String,
-    val description: String,
-    val color: Color
-)
-
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun App() {
-    // Custom Theme Colors based on the YG LLC screenshot
-    val brandPurple = MaterialTheme.colorScheme.onPrimaryFixedVariant  // Main card color
-    val backgroundDark = MaterialTheme.colorScheme.primaryFixed // App background
-    val titleColor = MaterialTheme.colorScheme.primary     // Header text color (lighter purple)
-    val onSurfaceColor = Color.White
-
+    // Custom Theme Colors based on the YG LLC branding
     val material3Colors = darkColorScheme(
-        primary = titleColor,
-        surface = brandPurple,
-        background = backgroundDark,
-        onSurface = onSurfaceColor
+        primary = MaterialTheme.colorScheme.primary,
+        surface = MaterialTheme.colorScheme.onPrimaryFixedVariant,
+        background = MaterialTheme.colorScheme.primaryFixed,
+        onSurface = Color.White
     )
 
     MaterialExpressiveTheme(colorScheme = material3Colors, typography = AppTypography) {
@@ -71,57 +54,57 @@ fun App() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HeroCarouselSection() {
+    data class HeroItem(
+        val id: Int,
+        val title: String,
+        val description: String,
+        val color: Color
+    )
+
     val items = remember {
         listOf(
             HeroItem(
                 id = 0,
                 title = "MyMileage",
-                description = "MyMileage is a modern Android app\nthat makes tracking your vehicle’s\nmileage, fuel efficiency, and trip history\nboth simple and accurate.",
-                color = Color(0xFF5B4D7E) // The main purple color
+                description = "MyMileage is a modern Android app that makes tracking your vehicle’s\nmileage, fuel efficiency, and trip history both simple and accurate.",
+                color = Color(0xFF5B4D7E)
             ),
             HeroItem(
                 id = 1,
-                title = "Project Beta",
-                description = "The next generation of tools.\nComing soon to the portfolio.",
+                title = "Fetal Kick",
+                description = "Fetal Kick provides expecting parents with a simple, reliable way to\nmonitor their baby’s movements and track trends throughout pregnancy.",
                 color = Color(0xFF4A3B69)
             ),
             HeroItem(
                 id = 2,
                 title = "Analytics",
-                description = "Deep dive into your data\nwith our new analytics platform.",
+                description = "Deep dive into your data with our new analytics platform.",
                 color = Color(0xFF3E3258)
             ),
             HeroItem(
                 id = 3,
                 title = "Future App",
-                description = "Expanding the ecosystem with\nconnected services.",
+                description = "Expanding the ecosystem with connected services.",
                 color = Color(0xFF5B4D7E)
             )
         )
     }
 
-    // Carousel State
-    val state = rememberCarouselState { items.size }
-
-    // Using HorizontalMultiBrowseCarousel to implement the "Hero" layout strategy.
-    // Setting a large preferredItemWidth ensures the main item takes focus,
-    // while the component handles the "masking" and "peeking" of the next item automatically.
     HorizontalMultiBrowseCarousel(
-        state = state,
-        preferredItemWidth = 350.dp, // Large width to create the Hero effect
-        itemSpacing = 16.dp,
-        contentPadding = PaddingValues(horizontal = 32.dp),
+        state = rememberCarouselState { items.count() },
         modifier = Modifier
             .fillMaxWidth()
-            .height(450.dp) // Fixed height for the hero section
+            .height(450.dp)
+            .padding(vertical = 16.dp),
+        preferredItemWidth = 350.dp,
+        itemSpacing = 16.dp,
+        contentPadding = PaddingValues(horizontal = 32.dp)
     ) { i ->
-
         val item = items[i]
-
         Box(
             modifier = Modifier
-                .maskClip(MaterialTheme.shapes.extraLarge)
                 .fillMaxSize()
+                .maskClip(MaterialTheme.shapes.extraLarge)
                 .background(item.color)
         ) {
             Column(
